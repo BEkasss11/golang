@@ -33,12 +33,10 @@ func SignUp(c *gin.Context) {
 
 	//Create User
 	user := models.User{
-		PhoneNumber: body.PhoneNumber,
-		Password:    string(hash),
-		Lastname:    body.Lastname,
-		Firstname:   body.Firstname,
-		Role:        "User",
-		Gender:      body.Gender,
+		Email:    body.Email,
+		Password: string(hash),
+		Username: body.UserName,
+		Role:     "User",
 	}
 
 	result := initializers.DB.Create(&user)
@@ -65,7 +63,7 @@ func SignIn(c *gin.Context) {
 	}
 
 	var user models.User
-	initializers.DB.First(&user, "phone_number = ?", body.PhoneNumber)
+	initializers.DB.First(&user, "email = ?", body.Email)
 	if user.ID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Invalid phone number.",

@@ -1,11 +1,6 @@
 package models
 
-
-
-
-
-// MenuItem represents the menu_items table
-type MenuItem struct {
+type Menu struct {
     ID          uint    `gorm:"primaryKey"`
     Name        string  `gorm:"not null"`
     Description string  `gorm:"type:text"`
@@ -14,7 +9,6 @@ type MenuItem struct {
 	LastUpdated  string  `gorm:"default:CURRENT_TIMESTAMP"`
 }
 
-// Payment represents the payments table
 type Payment struct {
     ID               uint    `gorm:"primaryKey"`
     OrderID          uint    `gorm:"not null"`
