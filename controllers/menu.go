@@ -1,7 +1,8 @@
 package controllers
 
 import (
-	"fmt"
+	"log"
+	"strconv"
 
 	"github.com/BEkasss11/golang/initializers"
 	"github.com/BEkasss11/golang/models"
@@ -11,40 +12,61 @@ import (
 func GetAllMenu(c *gin.Context) {
 	var menu []models.Menu
 
-	initializers.DB.Find(&menu)
-	fmt.Println(menu)
+	if err := initializers.DB.Find(&menu).Error; err != nil {
+		log.Println(1)
+        c.JSON(400, gin.H{"message": err.Error()})
+		return
+	}
+	c.JSON(200, gin.H{"message": menu})
 }
 
 func CreateMenuItem(c *gin.Context) {
 	var menu models.Menu
 	if err := c.ShouldBind(&menu); err != nil {
-		c.JSON(400, gin.H{"message": "ERROR_CREATE_ITEM"})
+		log.Println(1)
+        c.JSON(400, gin.H{"message": err.Error()})
 		return
 	}
 	if err := initializers.DB.Create(&menu).Error; err != nil {
-		c.JSON(400, gin.H{"message": err.Error()})
+		log.Println(2)
+        c.JSON(400, gin.H{"message": err.Error()})
 		return
 	}
-	c.JSON(200, gin.H{"message": "Success"})
+	c.JSON(200, gin.H{"message": "Success create"})
 }
 
 func UpdateMenuItem(c *gin.Context) {
+	id := c.Param("id")
+
 	var menuRequest models.Menu
 	if err := c.ShouldBind(&menuRequest); err != nil {
-		c.JSON(400, gin.H{"message": "ERROR_CREATE_ITEM"})
+		log.Println(1)
+        c.JSON(400, gin.H{"message": err.Error()})
 		return
 	}
-	var menu models.Menu
-	if err := initializers.DB.First(&menu, id).Error; err != nil {
-        return err
-    }
+	menuRequest.ID , _ = strconv.Atoi(id)
 
-	if err := initializers.DB.Create(&menu).Error; err != nil {
-		c.JSON(400, gin.H{"message": err.Error()})
+    if err := initializers.DB.Save(&menuRequest).Error; err != nil {
+		log.Println(2)
+        c.JSON(400, gin.H{"message": err.Error()})
 		return
-	}
-	c.JSON(200, gin.H{"message": "Success"})
+    }
+	c.JSON(200, gin.H{"message": "Success update"})
 }
 
 func DeleteMenuItem(c *gin.Context) {
+	id := c.Param("id")
+	var menu models.Menu
+    if err := initializers.DB.First(&menu, id).Error; err != nil {
+		log.Println(1)
+        c.JSON(400, gin.H{"message": err.Error()})
+		return
+    }
+
+    if err := initializers.DB.Delete(&menu).Error; err != nil {
+        log.Println(2)
+        c.JSON(400, gin.H{"message": err.Error()})
+		return
+    }
+	c.JSON(200, gin.H{"message": "Success delete"})
 }
