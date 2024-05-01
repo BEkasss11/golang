@@ -12,7 +12,7 @@ import (
 func GetAllMenu(c *gin.Context) {
 	var menu []models.Menu
 
-	if err := initializers.DB.Find(&menu).Error; err != nil {
+	if err := initializers.DB.Unscoped().Table("menu_items").Find(&menu).Error; err != nil {
 		log.Println(1)
         c.JSON(400, gin.H{"message": err.Error()})
 		return

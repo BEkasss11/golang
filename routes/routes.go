@@ -27,10 +27,10 @@ func MenuRoutes(routes *gin.Engine) {
 }
 
 
-func PaymentTypeRoutes(router *gin.Engine) {
-    router.GET("/payment_types", controllers.GetAllPaymentTypes)
-    router.POST("/payment_types", controllers.CreatePaymentType)
-    router.GET("/payment_types/:id", controllers.GetPaymentTypeByID)
-    router.PUT("/payment_types/:id", controllers.UpdatePaymentTypeByID)
-    router.DELETE("/payment_types/:id", controllers.DeletePaymentTypeByID)
-}
+// func PaymentTypeRoutes(router *gin.Engine) {
+//     router.GET("/payment_types", controllers.GetAllPaymentTypes)
+//     router.POST("/payment_types", controllers.CreatePaymentType)
+//     router.GET("/payment_types/:id", controllers.GetPaymentTypeByID)
+//     router.PUT("/payment_types/:id", controllers.UpdatePaymentTypeByID)
+//     router.DELETE("/payment_types/:id", controllers.DeletePaymentTypeByID)
+// }
