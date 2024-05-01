@@ -13,6 +13,6 @@ type OrderItem struct {
 	OrderID  uint   `gorm:"not null"`
 	ItemName string `gorm:"not null"`
 	Quantity uint   `gorm:"not null"`
-	NotType  string
 	Price    float64 `gorm:"not null"`
+	NotType  string
 }
