@@ -14,6 +14,7 @@ func main() {
 	router := gin.Default()
 	routes.AuthRoutes(router)
 	routes.UserRoutes(router)
+	
 
 	routes.MenuRoutes(router)
 

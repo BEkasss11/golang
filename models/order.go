@@ -15,5 +15,4 @@ type OrderItem struct {
 	ItemName string `gorm:"not null"`
 	Quantity uint   `gorm:"not null"`
 	Price    float64 `gorm:"not null"`
-	
 }
