@@ -13,3 +13,9 @@ func GetAllMenu(c *gin.Context) {
 	initializers.DB.Find(&menu)
 	fmt.Println(menu)
 }
+
+func CreateMenuItem(c *gin.Context) {
+	var menu []models.Menu
+	initializers.DB.Find(&menu)
+	fmt.Println(menu)
+}

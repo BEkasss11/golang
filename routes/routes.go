@@ -21,5 +21,7 @@ func UserRoutes(routes *gin.Engine) {
 
 func MenuRoutes(routes *gin.Engine) {
 	routes.GET("/menu", controllers.GetAllMenu)
-	
+	routes.POST("/menu/item", controllers.CreateMenuItem)
+	routes.PUT("/menu/item", controllers.UpdateMenuItem)
+	routes.DELETE("/menu/item/:id", controllers.DeleteMenuItem)
 }

@@ -9,5 +9,4 @@ type Payment struct {
 	CardExpiryMonth int     `gorm:"not null"`
 	CardExpiryYear  int     `gorm:"not null"`
 	CardCVV         string  `gorm:"not null"`
-	norInter        string
 }
