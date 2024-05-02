@@ -1,9 +1,11 @@
 package models
 
+import "time"
+
 type Order struct {
 	ID          uint    `gorm:"primaryKey"`
 	UserID      uint    `gorm:"not null"`
-	OrderTime   string  `gorm:"default:CURRENT_TIMESTAMP"`
+	OrderTime   time.Time `gorm:"default:CURRENT_TIMESTAMP"`
 	Status      string  `gorm:"not null"`
 	TotalAmount float64 `gorm:"not null"`
 }

@@ -17,6 +17,7 @@ func main() {
 	
 
 	routes.MenuRoutes(router)
+	routes.OrderRoutes(router)
 
 	router.Run(":1232")
 }

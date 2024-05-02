@@ -26,6 +26,18 @@ func MenuRoutes(routes *gin.Engine) {
 	routes.DELETE("/menu/item/:id", controllers.DeleteMenuItem)
 }
 
+func OrderRoutes(routes *gin.Engine) {
+    routes.POST("/orders", controllers.CreateOrder)
+    routes.GET("/orders/:id", controllers.GetOrderByID)
+    // routes.PUT("/orders/:id", controllers.UpdateOrder)
+    routes.DELETE("/orders/:id", controllers.DeleteOrder)
+
+    routes.POST("/order_items", controllers.CreateOrderItem)
+    routes.GET("/order_items/:id", controllers.GetOrderItemByID)
+    // routes.PUT("/order_items/:id", controllers.UpdateOrderItem)
+    routes.DELETE("/order_items/:id", controllers.DeleteOrderItem)
+}
+
 
 // func PaymentTypeRoutes(router *gin.Engine) {
 //     router.GET("/payment_types", controllers.GetAllPaymentTypes)

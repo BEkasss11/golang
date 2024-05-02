@@ -12,7 +12,7 @@ import (
 func ListOfUsers(c *gin.Context) {
 	var users []models.User
 
-	initializers.DB.Find(&users)
+	initializers.DB.Unscoped().Table("users").Find(&users)
 	if len(users) == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Couldn't retrieve data!"})
 		return
@@ -38,7 +38,7 @@ func ListOfUsers(c *gin.Context) {
 func GetUserByID(c *gin.Context) {
 	var user models.User
 
-	if err := initializers.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
+	if err := initializers.DB.Where("id = ?", c.Param("id")).Unscoped().Table("users").First(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
