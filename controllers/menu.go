@@ -8,7 +8,7 @@ import (
 	"github.com/BEkasss11/golang/models"
 	"github.com/gin-gonic/gin"
 )
-
+//Done 
 func GetAllMenu(c *gin.Context) {
 	var menu []models.Menu
 	if err := initializers.DB.Unscoped().Table("menu_items").Find(&menu).Error; err != nil {
@@ -18,7 +18,7 @@ func GetAllMenu(c *gin.Context) {
 	}
 	c.JSON(200, gin.H{"message": menu})
 }
-
+//Done
 func CreateMenuItem(c *gin.Context) {
 	var menu models.Menu
 	if err := c.ShouldBind(&menu); err != nil {
@@ -33,7 +33,7 @@ func CreateMenuItem(c *gin.Context) {
 	}
 	c.JSON(200, gin.H{"message": "Success create"})
 }
-
+//Done
 func UpdateMenuItem(c *gin.Context) {
 	id := c.Param("id")
 
@@ -52,7 +52,7 @@ func UpdateMenuItem(c *gin.Context) {
     }
 	c.JSON(200, gin.H{"message": "Success update"})
 }
-
+//MakeToFIX
 func DeleteMenuItem(c *gin.Context) {
 	id := c.Param("id")
 	var menu models.Menu

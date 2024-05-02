@@ -3,13 +3,12 @@ package controllers
 import (
     "log"
     // "strconv"
-
     "github.com/BEkasss11/golang/initializers"
     "github.com/BEkasss11/golang/models"
     "github.com/gin-gonic/gin"
 )
 
-// CreateOrder creates a new order
+// TomakeFix
 func CreateOrder(c *gin.Context) {
     var order models.Order
     if err := c.ShouldBind(&order); err != nil {
@@ -25,7 +24,7 @@ func CreateOrder(c *gin.Context) {
     c.JSON(200, gin.H{"message": "Success create"})
 }
 
-// GetOrderByID retrieves an order by its ID
+// Done
 func GetOrderByID(c *gin.Context) {
     var order models.Order
     if err := initializers.DB.Unscoped().Table("orders").First(&order, c.Param("id")).Error; err != nil {
@@ -36,7 +35,6 @@ func GetOrderByID(c *gin.Context) {
     c.JSON(200, gin.H{"data": order})
 }
 
-// UpdateOrder updates an existing order
 // func UpdateOrder(c *gin.Context) {
 //     id := c.Param("id")
 
@@ -48,7 +46,7 @@ func GetOrderByID(c *gin.Context) {
 //     }
 //     orderRequest.ID, _ = strconv.Atoi(id)
 
-//     if err := initializers.DB.Save(&orderRequest).Error; err != nil {
+//     if err := initializers.DB.Table("orders").Save(&orderRequest).Error; err != nil {
 //         log.Println(2)
 //         c.JSON(400, gin.H{"message": err.Error()})
 //         return
@@ -56,7 +54,7 @@ func GetOrderByID(c *gin.Context) {
 //     c.JSON(200, gin.H{"message": "Success update"})
 // }
 
-// DeleteOrder deletes an order
+// Maketofix
 func DeleteOrder(c *gin.Context) {
     id := c.Param("id")
     var order models.Order
@@ -66,7 +64,7 @@ func DeleteOrder(c *gin.Context) {
         return
     }
 
-    if err := initializers.DB.Delete(&order).Error; err != nil {
+    if err := initializers.DB.Table("orders").Delete(&order).Error; err != nil {
         log.Println(2)
         c.JSON(400, gin.H{"message": err.Error()})
         return
@@ -74,7 +72,7 @@ func DeleteOrder(c *gin.Context) {
     c.JSON(200, gin.H{"message": "Success delete"})
 }
 
-// CreateOrderItem creates a new order item
+// Done
 func CreateOrderItem(c *gin.Context) {
     var orderItem models.OrderItem
     if err := c.ShouldBind(&orderItem); err != nil {
@@ -90,10 +88,10 @@ func CreateOrderItem(c *gin.Context) {
     c.JSON(200, gin.H{"message": "Success create"})
 }
 
-// GetOrderItemByID retrieves an order item by its ID
+// Done
 func GetOrderItemByID(c *gin.Context) {
     var orderItem models.OrderItem
-    if err := initializers.DB.First(&orderItem, c.Param("id")).Error; err != nil {
+    if err := initializers.DB.Unscoped().Table("order_items").First(&orderItem, c.Param("id")).Error; err != nil {
         log.Println(1)
         c.JSON(400, gin.H{"message": err.Error()})
         return
@@ -121,7 +119,8 @@ func GetOrderItemByID(c *gin.Context) {
 //     c.JSON(200, gin.H{"message": "Success update"})
 // }
 
-// DeleteOrderItem deletes an order item
+
+// Done
 func DeleteOrderItem(c *gin.Context) {
     id := c.Param("id")
     var orderItem models.OrderItem
@@ -131,7 +130,7 @@ func DeleteOrderItem(c *gin.Context) {
         return
     }
 
-    if err := initializers.DB.Delete(&orderItem).Error; err != nil {
+    if err := initializers.DB.Table("order_items").Delete(&orderItem).Error; err != nil {
         log.Println(2)
         c.JSON(400, gin.H{"message": err.Error()})
         return
