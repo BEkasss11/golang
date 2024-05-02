@@ -7,7 +7,6 @@ import (
     "github.com/gin-gonic/gin"
 )
 
-// GetAllPayments retrieves all payments
 func GetAllPayments(c *gin.Context) {
     var payments []models.Payment
     if err := initializers.DB.Find(&payments).Error; err != nil {
@@ -18,7 +17,6 @@ func GetAllPayments(c *gin.Context) {
     c.JSON(http.StatusOK, payments)
 }
 
-// CreatePayment creates a new payment
 func CreatePaymentType(c *gin.Context) {
     var payment models.Payment
     if err := c.ShouldBindJSON(&payment); err != nil {
@@ -34,7 +32,6 @@ func CreatePaymentType(c *gin.Context) {
     c.JSON(http.StatusCreated, payment)
 }
 
-// GetPaymentByID retrieves a payment by its ID
 func GetPaymentByID(c *gin.Context) {
     var payment models.Payment
     id := c.Param("id")

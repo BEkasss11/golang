@@ -11,7 +11,6 @@ import (
 
 func GetAllMenu(c *gin.Context) {
 	var menu []models.Menu
-
 	if err := initializers.DB.Unscoped().Table("menu_items").Find(&menu).Error; err != nil {
 		log.Println(1)
         c.JSON(400, gin.H{"message": err.Error()})
@@ -27,7 +26,7 @@ func CreateMenuItem(c *gin.Context) {
         c.JSON(400, gin.H{"message": err.Error()})
 		return
 	}
-	if err := initializers.DB.Create(&menu).Error; err != nil {
+	if err := initializers.DB.Table("menu_items").Create(&menu).Error; err != nil {
 		log.Println(2)
         c.JSON(400, gin.H{"message": err.Error()})
 		return
@@ -46,7 +45,7 @@ func UpdateMenuItem(c *gin.Context) {
 	}
 	menuRequest.ID , _ = strconv.Atoi(id)
 
-    if err := initializers.DB.Save(&menuRequest).Error; err != nil {
+    if err := initializers.DB.Table("menu_items").Save(&menuRequest).Error; err != nil {
 		log.Println(2)
         c.JSON(400, gin.H{"message": err.Error()})
 		return
