@@ -56,16 +56,17 @@ func UpdateMenuItem(c *gin.Context) {
 func DeleteMenuItem(c *gin.Context) {
 	id := c.Param("id")
 	var menu models.Menu
-    if err := initializers.DB.First(&menu, id).Error; err != nil {
+	if err := initializers.DB.First(&menu, id).Error; err != nil {
 		log.Println(1)
-        c.JSON(400, gin.H{"message": err.Error()})
+		c.JSON(400, gin.H{"message": err.Error()})
 		return
-    }
+	}
 
-    if err := initializers.DB.Delete(&menu).Error; err != nil {
-        log.Println(2)
-        c.JSON(400, gin.H{"message": err.Error()})
+	if err := initializers.DB.Table("menu_items").Delete(&menu).Error; err != nil {
+		log.Println(2)
+		c.JSON(400, gin.H{"message": err.Error()})
 		return
-    }
+	}
 	c.JSON(200, gin.H{"message": "Success delete"})
 }
+
