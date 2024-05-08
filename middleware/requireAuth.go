@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 	"time"
-
+	"github.com/BEkasss11/golang/enums"
 	"github.com/BEkasss11/golang/initializers"
 	"github.com/BEkasss11/golang/models"
 	"github.com/dgrijalva/jwt-go"
@@ -45,9 +45,30 @@ func RequireAuth(c *gin.Context) {
 		}
 
 		c.Set("user", user)
+		c.Set("role", user.Role)
 
 		c.Next()
 	} else {
 		c.AbortWithStatus(http.StatusUnauthorized)
 	}
+}
+
+func IsAdmin(c *gin.Context) {
+	role, exists := c.Get("role")
+	fmt.Println(role)
+	fmt.Println(exists)
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "You are not admin."})
+		c.Abort()
+		return
+	}
+	if role != "Admin" {
+		fmt.Println(role)
+		fmt.Println(enums.ADMIN)
+		fmt.Println(role != enums.ADMIN)
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "You are not admin."})
+		c.Abort()
+		return
+	}
+	c.Next()
 }

@@ -2,7 +2,6 @@ package final_project
 
 import (
 	"fmt"
-
 	"github.com/BEkasss11/golang/middleware"
 	"github.com/gin-gonic/gin"
 )
@@ -21,6 +20,5 @@ func IsAuthorizedOrReadOnly(c *gin.Context) bool {
 	if loggedUser == nil {
 		return false
 	}
-
 	return true
 }

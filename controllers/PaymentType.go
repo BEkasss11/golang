@@ -43,7 +43,6 @@ func GetPaymentByID(c *gin.Context) {
     c.JSON(http.StatusOK, payment)
 }
 
-// UpdatePaymentByID updates a payment by its ID
 func UpdatePaymentByID(c *gin.Context) {
     var payment models.Payment
     id := c.Param("id")
@@ -65,7 +64,6 @@ func UpdatePaymentByID(c *gin.Context) {
     c.JSON(http.StatusOK, payment)
 }
 
-// DeletePaymentByID deletes a payment by its ID
 func DeletePaymentByID(c *gin.Context) {
     var payment models.Payment
     id := c.Param("id")

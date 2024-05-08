@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"net/http"
-
 	final_project "github.com/BEkasss11/golang"
 	"github.com/BEkasss11/golang/initializers"
 	"github.com/BEkasss11/golang/models"
@@ -66,9 +65,7 @@ func DeleteUserByID(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
-
 	isAuth := final_project.IsAuthorizedOrReadOnly(c)
-
 	if !isAuth {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "You are unauthorized."})
 		return

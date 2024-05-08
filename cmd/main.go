@@ -14,10 +14,7 @@ func main() {
 	router := gin.Default()
 	routes.AuthRoutes(router)
 	routes.UserRoutes(router)
-	
-
 	routes.MenuRoutes(router)
 	routes.OrderRoutes(router)
-
 	router.Run(":1232")
 }

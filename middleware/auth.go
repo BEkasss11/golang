@@ -63,7 +63,7 @@ func SignIn(c *gin.Context) {
 	}
 
 	var user models.User
-	initializers.DB.First(&user, "email = ?", body.Email)
+	initializers.DB.First(&user, "username = ?", body.UserName)
 	if user.ID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Invalid phone number.",
@@ -97,7 +97,6 @@ func SignIn(c *gin.Context) {
 	c.SetSameSite(http.SameSiteLaxMode)
 	c.SetCookie("Authorization", tokenString, 3600*24, "", "", false, true)
 	c.JSON(http.StatusOK, gin.H{"token": tokenString})
-	return
 }
 
 func SignOut(c *gin.Context) {
@@ -111,7 +110,6 @@ func ValidateUser(c *gin.Context) {
 	if !err {
 		return
 	}
-
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
 

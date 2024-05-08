@@ -1,6 +1,5 @@
 package models
 
-
 type User struct {
 	ID       uint   `gorm:"primaryKey"`
 	Email    string `gorm:"unique;not null"`
@@ -18,4 +17,5 @@ type SignUpInput struct {
 type SignInInput struct {
 	Email    string `gorm:"unique;not null"`
 	Password string `json:"password"`
+	UserName string `json:"firstname"`
 }
