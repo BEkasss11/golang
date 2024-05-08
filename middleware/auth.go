@@ -114,36 +114,28 @@ func ValidateUser(c *gin.Context) {
 }
 
 func GetPayloadFromToken(c *gin.Context) gin.H {
-	// retrieve the token from the cookie
 	tokenCookie, err := c.Request.Cookie("Authorization")
 	if err != nil {
-		//c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "auth token not found"})
 		return nil
 	}
 	tokenString := tokenCookie.Value
 
-	// verify the token
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		return []byte(os.Getenv("SECRET")), nil
 	})
 
 	if err != nil {
-		//c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid auth token."})
+
 		return nil
 	}
 
-	//decode the token and access the user details
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-		//c.JSON(http.StatusOK, gin.H{"userID": claims["userID"], "userRole": claims["userRole"]})
-
 		response := gin.H{
 			"userID":   claims["userID"],
 			"userRole": claims["userRole"],
 		}
-
 		return response
 	} else {
-		//c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid auth token."})
 		return nil
 	}
 }

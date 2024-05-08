@@ -10,7 +10,6 @@ import (
 
 func ListOfUsers(c *gin.Context) {
 	var users []models.User
-
 	initializers.DB.Unscoped().Table("users").Find(&users)
 	if len(users) == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Couldn't retrieve data!"})
